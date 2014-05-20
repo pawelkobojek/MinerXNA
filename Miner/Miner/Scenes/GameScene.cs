@@ -114,7 +114,7 @@ namespace Miner
             spriteBatch.DrawString(font, String.Format("Health: {0}/{1}    Fuel: {2}/{3}    Exp: {4}/{5}    Points: {6}",
                 this.Game.GameState.Miner.Suit.Durability, this.Game.GameState.Miner.Suit.MaxDurability,
                 this.Game.GameState.Miner.Suit.Fuel, this.Game.GameState.Miner.Suit.MaxFuel,
-                0, 0,
+                this.Game.GameState.Miner.Experience, this.Game.GameState.Miner.ExpToNextLevel,
                 this.Game.GameState.User.Score), barPosition, Color.Black);
 
             foreach (var firstDim in this.Game.GameState.Map.Fields)

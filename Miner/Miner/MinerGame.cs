@@ -17,6 +17,7 @@ namespace Miner
     public class MinerGame : Game
     {
         private const string SETTINGS_PATH = "settings.xml";
+        private const string HIGHSCORE_PATH = "scores.xml";
 
         /// <summary>
         /// Pole przechowujące stan gry.
@@ -73,8 +74,17 @@ namespace Miner
                     this.Settings = (Settings)xml.Deserialize(file);
                 }
             }
-        }
 
+            if (File.Exists(HIGHSCORE_PATH))
+            {
+                using (FileStream file = new FileStream(HIGHSCORE_PATH, FileMode.Open))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(HighScores));
+                    HighScores hs = HighScores.GetInstance();
+                    hs = (HighScores)xml.Deserialize(file);
+                }
+            }
+        }
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -158,6 +168,19 @@ namespace Miner
             {
                 XmlSerializer xml = new XmlSerializer(typeof(Settings));
                 xml.Serialize(fs, this.Settings);
+            }
+
+            if (this.GameState.User != null && this.GameState.User.Score > 0)
+            {
+                Result result = new Result(this.GameState.User);
+                HighScores hs = HighScores.GetInstance();
+                hs.AddResult(result);
+
+                using (FileStream fs = new FileStream(HIGHSCORE_PATH, FileMode.Create))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(HighScores));
+                    xml.Serialize(fs, hs);
+                }
             }
             this.Exit();
         }

@@ -45,6 +45,11 @@ namespace Miner
         public const string ASSET_NAME = "ground";
 
         /// <summary>
+        /// Ilośc punktów za wykopanie pola
+        /// </summary>
+        public const int SCORE_FOR_DIG = 5;
+
+        /// <summary>
         /// Flaga mówiąca, czy pole jest odkryte.
         /// </summary>
         public bool IsRevealed { get; set; }

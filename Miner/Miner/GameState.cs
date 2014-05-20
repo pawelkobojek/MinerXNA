@@ -64,6 +64,7 @@ namespace Miner
 
         public GameState()
         {
+            this.User = new User() { Name = "asd" };
             this.Map = new GameMap();
             this.Keys = new List<Key>();
             this.Bullets = new List<Bullet>();

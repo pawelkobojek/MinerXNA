@@ -15,6 +15,7 @@ namespace Miner
         /// Referencja na instancję singletona.
         /// </summary>
         private static HighScores instance = new HighScores();
+        private const int MAX_HIGHSCORES_COUNT = 10;
 
         /// <summary>
         /// Lista przechowująca najlepsze wyniki. Implementacja klasy zapewnia, że są one posortowane
@@ -34,7 +35,24 @@ namespace Miner
         /// <returns>Indeks porządkowy wstawionego wyniku</returns>
         public int AddResult(Result result)
         {
-            throw new NotImplementedException();
+            int res = result.Score;
+            int i;
+            for (i = 0; i < HighScoreList.Count; i++)
+            {
+                if (res > HighScoreList[i].Score)
+                {
+                    HighScoreList.Insert(i, result);
+                    return i;
+                }
+            }
+
+            if (i == HighScoreList.Count && HighScoreList.Count < MAX_HIGHSCORES_COUNT)
+            {
+                HighScoreList.Add(result);
+                return i;
+            }
+
+            return -1;
         }
 
         /// <summary>

@@ -132,6 +132,8 @@ namespace Miner
             LaserHitPoints--;
             if (LaserHitPoints <= 0)
             {
+                game.GameState.User.Score += this.ExprienceGained;
+                game.GameState.Miner.Experience += this.ExprienceGained;
                 game.GameState.Enemies.Remove(this);
             }
         }

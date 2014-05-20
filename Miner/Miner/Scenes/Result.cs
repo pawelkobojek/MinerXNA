@@ -11,6 +11,17 @@ namespace Miner
     /// </summary>
     public class Result
     {
+        public Result()
+        {
+
+        }
+
+        public Result(User user)
+        {
+            this.PlayerName = user.Name;
+            this.Score = user.Score;
+        }
+
         /// <summary>
         /// Imię gracza, który osiągnął zapisany w obiekcie tej klasy wynik.
         /// </summary>

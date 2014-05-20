@@ -68,6 +68,16 @@ namespace Miner
         private const float JUMP_SPEED = -230.0f;
 
         /// <summary>
+        /// Liczba punktów doświadczenia.
+        /// </summary>
+        public int Experience { get; set; }
+
+        /// <summary>
+        /// Liczba punktów doświadczenia potrzebna do osiągnięcia następnego poziomu.
+        /// </summary>
+        public int ExpToNextLevel { get; private set; }
+
+        /// <summary>
         /// Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
         /// </summary>
         private Miner() { }
@@ -76,6 +86,7 @@ namespace Miner
             : base(game)
         {
             this.Suit = new Nanosuit();
+            this.ExpToNextLevel = 100;
             this.Width -= 10.0f;
             this.Height -= 10.0f;
             this.sprite = game.Content.Load<Texture2D>(ASSET_NAME);
@@ -114,7 +125,7 @@ namespace Miner
                 }
                 return;
             }
-            PrintState();
+            // PrintState();
 
             if (state != State.OnGround && state != State.Digging)
             {
@@ -178,11 +189,6 @@ namespace Miner
             int bottomLeftY = (int)(Position.Y + this.Height - 10f) / Field.FieldHeight;
             int bottomRightX = (int)(Position.X + this.Width) / Field.FieldWidth;
             int bottomRightY = (int)(Position.Y + this.Height - 10f) / Field.FieldHeight;
-
-            //if (bottomLeftX >= 0 && bottomLeftY >= 0 && bottomLeftX < game.GameState.Map.Fields.GetLength(0) && bottomLeftY < game.GameState.Map.Fields.GetLength(1))
-            //{
-
-            //}
 
             Field topLeft = (topLeftX >= 0 && topLeftY >= 0 && topLeftX < game.GameState.Map.Fields.Length && topLeftY < game.GameState.Map.Fields[0].Length) ?
                 game.GameState.Map.Fields[topLeftX][topLeftY] : null;
@@ -285,6 +291,14 @@ namespace Miner
                 }
             }
 
+            // Check whether Miner has enough experience to level up
+            if (this.Experience >= this.ExpToNextLevel)
+            {
+                // Excessed experience points pass to the next level.
+                this.Experience = this.Experience - this.ExpToNextLevel;
+                this.ExpToNextLevel *= 2;
+                this.Suit.IncreaseNanosuitLevel();
+            }
 
             OldKeyState = keyState;
         }
@@ -436,6 +450,7 @@ namespace Miner
                 this.Position = new Vector2(diggedField.Position.X + 5.0f, this.Position.Y);
                 this.digStartPosition = this.Position;
                 diggedField.Dig();
+                this.game.GameState.User.Score += Field.SCORE_FOR_DIG;
                 this.state = State.Digging;
                 Velocity.Y = Field.FieldHeight / 1;
             }
