@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Controls>
+    <Up>W</Up>
+    <Down>S</Down>
+    <Left>A</Left>
+    <Right>D</Right>
+    <Action>Space</Action>
+  </Controls>
+  <Sound>
+    <SoundEffects>true</SoundEffects>
+    <Music>true</Music>
+  </Sound>
+</Settings>

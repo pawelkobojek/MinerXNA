@@ -1,0 +1,1943 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Miner</name>
+    </assembly>
+    <members>
+        <member name="T:Miner.Bullet">
+            <summary>
+            Klasa reprezentująca obiekt pocisku.
+            </summary>
+        </member>
+        <member name="T:Miner.GameObject">
+            <summary>
+            Klasa bazowa dla wszystkich widzialnych obiektów w grze.
+            </summary>
+        </member>
+        <member name="F:Miner.GameObject.EPS">
+            <summary>
+            Stała stanowiąca dokładność używana w porównaniach między liczbami zmiennoprzeciwnkowymi.
+            </summary>
+        </member>
+        <member name="F:Miner.GameObject.game">
+            <summary>
+            Referenca na obiekt gry.
+            </summary>
+        </member>
+        <member name="F:Miner.GameObject.Velocity">
+            <summary>
+            Prędkość obiektu.
+            </summary>
+        </member>
+        <member name="F:Miner.GameObject.sprite">
+            <summary>
+            Referencja na obrazek reprezentujący obiekt.
+            </summary>
+        </member>
+        <member name="M:Miner.GameObject.#ctor">
+            <summary>
+            Konstruktor bezparametrowy.
+            </summary>
+        </member>
+        <member name="M:Miner.GameObject.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.GameObject.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.GameObject.CollidesWith(Miner.GameObject)">
+            <summary>
+            Metoda sprawdzająca, czy dany obiekt koliduje (w dowolnym kierunku) z innym.
+            </summary>
+            <param name="obj">Obiekt, z który mają być sprawdzane kolizje.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Miner.GameObject.CollidesHorizontallyWith(Miner.GameObject)">
+            <summary>
+            Metoda sprawdzająca, czy dany obiekt koliduje z innym, ale tylko w kiernku poziomym.
+            </summary>
+            <param name="obj">Obiekt, z który mają być sprawdzane kolizje.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Miner.GameObject.PosX">
+            <summary>
+            Pozycja X wskazująca pole, na którym znajduje się obiekt.
+            </summary>
+        </member>
+        <member name="P:Miner.GameObject.PosY">
+            <summary>
+            Pozycja Y wskazująca pole, na którym znajduje się obiekt.
+            </summary>
+        </member>
+        <member name="P:Miner.GameObject.Width">
+            <summary>
+            Szerokość obiektu w pikselach.
+            </summary>
+        </member>
+        <member name="P:Miner.GameObject.Height">
+            <summary>
+            Wysokość obiektu w pikselach.
+            </summary>
+        </member>
+        <member name="P:Miner.GameObject.Position">
+            <summary>
+            Dokładna pozycja obiektu na ekranie.
+            </summary>
+        </member>
+        <member name="F:Miner.Bullet.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Bullet.width">
+            <summary>
+            Szerokość pocisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Bullet.height">
+            <summary>
+            Wysokość pocisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Bullet.velocity">
+            <summary>
+            Wektor prędkości.
+            </summary>
+        </member>
+        <member name="M:Miner.Bullet.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.Bullet.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.Bullet.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.BonusItem">
+            <summary>
+            Klasa bazowa dla wszystkich klas reprezentujących bonusy.
+            </summary>
+        </member>
+        <member name="F:Miner.BonusItem.SpawnTime">
+            <summary>
+            Czas, co który pojawia się nowy bonus danego typu (o ile to możliwe).
+            </summary>
+        </member>
+        <member name="F:Miner.BonusItem.LifeTime">
+            <summary>
+            Czas występowania (w milisekundach).
+            </summary>
+        </member>
+        <member name="F:Miner.BonusItem.TotalUsageTime">
+            <summary>
+            Całkowity czas działania.
+            </summary>
+        </member>
+        <member name="F:Miner.BonusItem.field">
+            <summary>
+            Pole na którym znajduje się bonus.
+            </summary>
+        </member>
+        <member name="M:Miner.BonusItem.#ctor">
+            <summary>
+            Domyślny konstruktor.
+            </summary>
+        </member>
+        <member name="M:Miner.BonusItem.#ctor(Miner.MinerGame,System.Int32,System.Int32)">
+            <summary>
+            Konstruktor przypisujący pole na mapie.
+            </summary>
+            <param name="game">Referencja na obiekt gry.</param>
+            <param name="posX">Pozycja poziomo (X)</param>
+            <param name="posY">Pozycja pionowo (Y)</param>
+        </member>
+        <member name="M:Miner.BonusItem.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.BonusItem.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.BonusItem.CreateRandomBonus(Miner.MinerGame,System.Int32,System.Int32)">
+            <summary>
+            Tworzy bonus losowego typu.
+            </summary>
+            <param name="minerGame">Referencja do obiektu gry.</param>
+            <param name="x">Pozycja X na mapie</param>
+            <param name="y">Pozycja Y na mapie</param>
+            <returns>Bonus losowego typu</returns>
+        </member>
+        <member name="P:Miner.BonusItem.RemainingLifeTime">
+            <summary>
+            Pozostały czas na mapie.
+            </summary>
+        </member>
+        <member name="P:Miner.BonusItem.RemainingUsageTime">
+            <summary>
+            Pozostały czas działania.
+            </summary>
+        </member>
+        <member name="T:Miner.Controls">
+            <summary>
+            Klasa przechowująca konfigurację klawiszy.
+            </summary>
+        </member>
+        <member name="P:Miner.Controls.Up">
+            <summary>
+            Przycisk "w górę".
+            </summary>
+        </member>
+        <member name="P:Miner.Controls.Down">
+            <summary>
+            Przycisk "w dół".
+            </summary>
+        </member>
+        <member name="P:Miner.Controls.Left">
+            <summary>
+            Przycisk "w lewo".
+            </summary>
+        </member>
+        <member name="P:Miner.Controls.Right">
+            <summary>
+            Przycisk "w prawo".
+            </summary>
+        </member>
+        <member name="P:Miner.Controls.Action">
+            <summary>
+            Przycisk akcji.
+            </summary>
+        </member>
+        <member name="T:Miner.CosmicMatter">
+            <summary>
+            Klasa reprezentująca pole typu "Kosmiczny budulec"
+            </summary>
+        </member>
+        <member name="T:Miner.Field">
+            <summary>
+            Klasa reprezentująca zwykłe pole. Jednocześnie stanowi klasę bazową dla pól specjalnych.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.REVEAL_TIME">
+            <summary>
+            Czas w milisekundach, w którym pole pozostaje okdryte.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.DIG_TIME">
+            <summary>
+            Czas milisekundach, w którym pole pozostaje odkopane.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.SCORE_FOR_DIG">
+            <summary>
+            Ilośc punktów za wykopanie pola
+            </summary>
+        </member>
+        <member name="F:Miner.Field.FieldWidth">
+            <summary>
+            Szerokość pola w pikselach.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.FieldHeight">
+            <summary>
+            Wysokość pola w pikselach.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.revealTime">
+            <summary>
+            Czas w milisekundach który upłynął od momentu odsłonięcia pola.
+            Przestaje być liczony gdy pole znowu zostanie zasłonięte.
+            </summary>
+        </member>
+        <member name="F:Miner.Field.digTime">
+            <summary>
+            Czas w milisekundach który upłynął od momentu wykopania pola.
+            Przestaje być liczony gdy pole znowu zostanie zakopane.
+            </summary>
+        </member>
+        <member name="M:Miner.Field.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.Field.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.Field.Reveal">
+            <summary>
+            Metoda odkrywa pole i rozpoczyna odliczanie czasu jego odkrycia.
+            </summary>
+        </member>
+        <member name="M:Miner.Field.Dig">
+            <summary>
+            Metoda odkopuje pole i rozpoczyna odliczanie czasu jego odkrycia.
+            </summary>
+        </member>
+        <member name="P:Miner.Field.IsRevealed">
+            <summary>
+            Flaga mówiąca, czy pole jest odkryte.
+            </summary>
+        </member>
+        <member name="P:Miner.Field.IsEmpty">
+            <summary>
+            Flaga mówiąca, czy pole jest puste.
+            </summary>
+        </member>
+        <member name="P:Miner.Field.IsDigged">
+            <summary>
+            Flaga mówiąca, czy pole jest wykopane.
+            </summary>
+        </member>
+        <member name="P:Miner.Field.Bonus">
+            <summary>
+            Referencja na bonus znajdujący się na tym polu (null, jeśli go nie ma).
+            </summary>
+        </member>
+        <member name="M:Miner.CosmicMatter.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.CosmicMatter.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.CosmicMatter.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.DifficultyLevel">
+            <summary>
+            Wyliczenie określające jeden z trzech poziomow trudności:
+            Łatwy,
+            Średni,
+            Trudny.
+            </summary>
+        </member>
+        <member name="T:Miner.DifficultyMenu">
+            <summary>
+            Klasa odpowiedzialna za menu wyboru poziomu trudności
+            </summary>
+        </member>
+        <member name="T:Miner.MenuScene">
+            <summary>
+            Abstrakcyjna klasa bazowa dla wszystkich scen.
+            </summary>
+        </member>
+        <member name="F:Miner.MenuScene.MENU_ITEM_WIDTH">
+            <summary>
+            Stała określająca domyślną szerokość przycisku w każdej scenie..
+            </summary>
+        </member>
+        <member name="F:Miner.MenuScene.MENU_ITEM_HEIGHT">
+            <summary>
+            Stała określająca domyślną wysokośc przycisku w każdej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.MenuScene.GAP">
+            <summary>
+            Stała określająca przerwę między przyciskami w każdej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.MenuScene.currentlySelected">
+            <summary>
+            Indeks aktualnie wybranego przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.MenuScene.previousMenu">
+            <summary>
+            Referencja na poprzednie menu. Używana, żeby zapewnić możliwość powrotu.
+            </summary>
+        </member>
+        <member name="M:Miner.MenuScene.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.MenuScene.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.MenuScene.GoBack">
+            <summary>
+            Metoda wywoływana, żeby wrócić do poprzedniego menu.
+            </summary>
+        </member>
+        <member name="P:Miner.MenuScene.OldKeyState">
+            <summary>
+            Zmienna przechowująca stan klawiatury po ostatnim wywołaniu metody Update. Używana, żeby zapobiec wielokrotnemu odczytaniu jednego przyciśnięcia.
+            </summary>
+        </member>
+        <member name="P:Miner.MenuScene.CurrentKeyState">
+            <summary>
+            Zmienna przechowująca aktualny stan klawiatury. Potrzebna przy przejściach między poszczególnymi scenami, żeby przekazać jej wartość 
+            jako OldKeyState nowego menu.
+            </summary>
+        </member>
+        <member name="P:Miner.MenuScene.Game">
+            <summary>
+            Referencja na obiekt gry.
+            </summary>
+        </member>
+        <member name="P:Miner.MenuScene.SoundOn">
+            <summary>
+            Flaga określająca, czy muzyka jest włączona czy nie.
+            Opcja wspólna dla wszystkich scen.
+            </summary>
+        </member>
+        <member name="P:Miner.MenuScene.MusicOn">
+            <summary>
+            Flaga określająca, czy muzyka jest włączona czy nie.
+            Opcja wspólna dla wszystkich scen.
+            </summary>
+        </member>
+        <member name="P:Miner.MenuScene.MenuItems">
+            <summary>
+            Lista przycisków.
+            </summary>
+        </member>
+        <member name="F:Miner.DifficultyMenu.CHOOSE_DIFFICULTY">
+            <summary>
+            Napis na etykiecie tytułowej.
+            </summary>
+        </member>
+        <member name="F:Miner.DifficultyMenu.EASY">
+            <summary>
+            Napis na przyicsku wyboru łatwego poziomu trudności.
+            </summary>
+        </member>
+        <member name="F:Miner.DifficultyMenu.MEDIUM">
+            <summary>
+            Napis na przyicsku wyboru średniego poziomu trudności.
+            </summary>
+        </member>
+        <member name="F:Miner.DifficultyMenu.HARD">
+            <summary>
+            Napis na przyicsku wyboru trudnego poziomu trudności.
+            </summary>
+        </member>
+        <member name="T:Miner.Direction">
+            <summary>
+            Wyliczenie określające jeden z czterech kierunków.
+            </summary>
+        </member>
+        <member name="T:Miner.DoubleJump">
+            <summary>
+            Klasa reprezentująca bonus typu "Podwójny skok"
+            </summary>
+        </member>
+        <member name="F:Miner.DoubleJump.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="M:Miner.DoubleJump.#ctor(Miner.MinerGame,System.Int32,System.Int32)">
+            <summary>
+            Konstruktor
+            </summary>
+            <param name="game">Referencja do obiektu gry.</param>
+            <param name="posX">Pozycja X na mapie.</param>
+            <param name="posY">Pozycja Y na mapie.</param>
+        </member>
+        <member name="P:Miner.DoubleJump.Used">
+            <summary>
+            Flaga ograniczająca ilość podskoków do dwóch.
+            </summary>
+        </member>
+        <member name="T:Miner.Enemy">
+            <summary>
+            Bazowa klasa dla wszystkich przeciwników.
+            </summary>
+        </member>
+        <member name="T:Miner.IMoveable">
+            <summary>
+            Interfejs zapewniający możliwość poruszania się po mapie.
+            </summary>
+        </member>
+        <member name="M:Miner.IMoveable.Move(Miner.Direction)">
+            <summary>
+            Ruch obiektu w kierunku Direction.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek ruchu</param>
+        </member>
+        <member name="T:Miner.IMeleeAttacker">
+            <summary>
+            Interfejs zapewniający możliwość zadawania obrażeń w zwarciu.
+            </summary>
+        </member>
+        <member name="M:Miner.IMeleeAttacker.MeleeAttack(Miner.Direction)">
+            <summary>
+            Metoda wywoływana przez postać atakującą w zwarciu.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek ataku</param>
+            <returns>Wartość zadanych obrażeń</returns>
+        </member>
+        <member name="P:Miner.IMeleeAttacker.MeleeDamage">
+            <summary>
+            Pole określające wartość obrażeń zadawanych w zwarciu.
+            </summary>
+        </member>
+        <member name="F:Miner.Enemy.speed">
+            <summary>
+            Wartość impulsu prędkości dodawanego do składowej X prędkości przy wykonaniu ruchu.
+            </summary>
+        </member>
+        <member name="F:Miner.Enemy.state">
+            <summary>
+            Stan obiektu.
+            </summary>
+        </member>
+        <member name="F:Miner.Enemy.gravity">
+            <summary>
+            Grawitacja.
+            </summary>
+        </member>
+        <member name="M:Miner.Enemy.#ctor">
+            <summary>
+            Konstruktor bezparametrowy.
+            </summary>
+        </member>
+        <member name="M:Miner.Enemy.Move(Miner.Direction)">
+            <summary>
+            Implementacja interfejsu IMoveable. Ruch obiektu w kierunku Direction.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek ruchu</param>
+        </member>
+        <member name="M:Miner.Enemy.MeleeAttack(Miner.Direction)">
+            <summary>
+            Implementacja interfejsu IMeleeAttacker. Metoda wywoływana przez postać atakującą w zwarciu.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek ataku</param>
+            <returns>Wartość zadanych obrażeń</returns>
+        </member>
+        <member name="M:Miner.Enemy.JumpedOn">
+            <summary>
+            Metoda wywoływana w przypadku naskoku na głowę.
+            Dekrementuja wartość licznika naskoków na głowę.
+            Jeśli jego wartość spadnie do zera, przeciwnik zostaje zabity.
+            </summary>
+        </member>
+        <member name="M:Miner.Enemy.ShotWithLaser(Miner.Bullet)">
+            <summary>
+            Metoda wywoływana po otrzymaniu strzału z lasera.
+            Dekrementuja wartość licznika trafień laserem.
+            Jeśli jego wartość spadnie do zera, przeciwnik zostaje zabity.
+            </summary>
+            <param name="bullet">Pocisk, którym przeciwnik został trafiony</param>
+        </member>
+        <member name="M:Miner.Enemy.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.Enemy.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="P:Miner.Enemy.JumpOnHitPoints">
+            <summary>
+            Liczba naskoków na głowę do zabicia.
+            </summary>
+        </member>
+        <member name="P:Miner.Enemy.LaserHitPoints">
+            <summary>
+            Liczbra trafień laserem do zabicia.
+            </summary>
+        </member>
+        <member name="P:Miner.Enemy.ExprienceGained">
+            <summary>
+            Liczba punktów doświadczenia uzyskana po zabiciu przeciwnika.
+            </summary>
+        </member>
+        <member name="P:Miner.Enemy.LastMoveDirection">
+            <summary>
+            Kierunek ostatniego ruchu, używany do określenia strzału.
+            </summary>
+        </member>
+        <member name="P:Miner.Enemy.MeleeDamage">
+            <summary>
+            Implementacja interfejsu IMeleeAttacker. Pole określające wartość obrażeń w zwarciu.
+            </summary>
+        </member>
+        <member name="T:Miner.Fuel">
+            <summary>
+            Klasa reprezentująca bonus "Paliwo".
+            </summary>
+        </member>
+        <member name="F:Miner.Fuel.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="P:Miner.Fuel.Amount">
+            <summary>
+            Ilość paliwa (w jednostkach), które zawiera ten bonus.
+            </summary>
+        </member>
+        <member name="T:Miner.GameMap">
+            <summary>
+            Klasa reprezentująca mapę gry.
+            </summary>
+        </member>
+        <member name="F:Miner.GameMap.DEF_WIDTH">
+            <summary>
+            Stała określająca szerokość mapy (w polach).
+            </summary>
+        </member>
+        <member name="F:Miner.GameMap.DEF_HEIGHT">
+            <summary>
+            Stała określająca wysokość mapy (w polach).
+            </summary>
+        </member>
+        <member name="P:Miner.GameMap.Fields">
+            <summary>
+            Tablica wielkości DEF_WIDTH x DEF_HEIGHT stanowiąca rzeczywistą mapę gry.
+            </summary>
+        </member>
+        <member name="T:Miner.GameScene">
+            <summary>
+            Scena rozgrywki.
+            </summary>
+        </member>
+        <member name="F:Miner.GameScene.LAST_LEVEL">
+            <summary>
+            Numer ostatniego poziomu.
+            </summary>
+        </member>
+        <member name="F:Miner.GameScene.bonusSpawnTime">
+            <summary>
+            Czas w milisekundach, który upłynął od pojawienia się ostatniego bonusu.
+            </summary>
+        </member>
+        <member name="M:Miner.GameScene.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.GameScene.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.GameScene.GenerateLevel(System.Int32)">
+            <summary>
+            Metoda generująca poziom z pliku.
+            </summary>
+            <param name="number">Numer poziomu do wygenerowania.</param>
+        </member>
+        <member name="T:Miner.GameState">
+            <summary>
+            Klasa odpowiedzialna za przetrzymywanie informacji o stanie gry. Plik xml otrzymany z jej serializacji
+            jest jednocześnie stanem gry.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.User">
+            <summary>
+            Aktualnie grający użytkownik.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.CurrentLevel">
+            <summary>
+            Aktualny poziom
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.Difficulty">
+            <summary>
+            Wybrany przez użytkownika poziom trudności.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.Miner">
+            <summary>
+            Postać Minera.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.Keys">
+            <summary>
+            Lista zebranych przez gracza kluczy.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.Map">
+            <summary>
+            Mapa gry. Przechowuje również informacje o obiektach znajdujących się na polach.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.Bullets">
+            <summary>
+            Lista aktualnie występujących pocisków.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.Enemies">
+            <summary>
+            Lista aktualnie występujących przeciwników.
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.GatesOpen">
+            <summary>
+            Flaga określająca, czy Kosmiczna Wrota są otwarte (ustawiana wtedy, gdy gracz wykona warunki koniecznie do zakończenia danego etapu).
+            </summary>
+        </member>
+        <member name="P:Miner.GameState.LevelCompleted">
+            <summary>
+            Flaga określająca, czy dany etap został ukończony, tj. czy gracz wszedł w Kosmiczne Wrota.
+            </summary>
+        </member>
+        <member name="T:Miner.HighScoreMenu">
+            <summary>
+            Scena menu najlepszych wyników.
+            </summary>
+        </member>
+        <member name="F:Miner.HighScoreMenu.LABEL_BEST_SCORES">
+            <summary>
+            Stała przechowująca napis etykiety tytułowej.
+            </summary>
+        </member>
+        <member name="F:Miner.HighScoreMenu.label">
+            <summary>
+            Etykieta tytułowa.
+            </summary>
+        </member>
+        <member name="F:Miner.HighScoreMenu.scoresList">
+            <summary>
+            Lista wyników.
+            </summary>
+        </member>
+        <member name="M:Miner.HighScoreMenu.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.HighScoreMenu.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="P:Miner.HighScoreMenu.HighScores">
+            <summary>
+            Obiekt przechowujący listę najlepszych wyników.
+            </summary>
+        </member>
+        <member name="T:Miner.HighScoreMenu.ListMenuItem">
+            <summary>
+            Prywatna klasa będąca rozszerzeniem klasy MenuItem. Obiekt tej klasy stanowi wyświetlaną listę wyników.
+            </summary>
+        </member>
+        <member name="T:Miner.Scenes.MenuItem">
+            <summary>
+            Klasa reprezentująca przycisk (wraz z krawędzią) w menu.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.FONT_ASSET">
+            <summary>
+            Ścieżka do czcionki użytej na tej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.BORDER">
+            <summary>
+            Stała określająca grubość krawędzi.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.outer">
+            <summary>
+            Prostokąt stanowiący obwód przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.inner">
+            <summary>
+            Prostokąt stanowiący wnętrze przycisku (bez krawędzi).
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.texture">
+            <summary>
+            Tekstura, używana do narysowania przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.font">
+            <summary>
+            Czcionka napisów na przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.menu">
+            <summary>
+            Referencja na menu.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.textDim">
+            <summary>
+            Wymiary tekstu zapisanego czcionką napisów przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.textNaturalPosition">
+            <summary>
+            Pozycja tekstu na przycisku we współrzędnych okna, którą musi przyjąć tekst, żeby był wyśrodkowany.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.outerColor">
+            <summary>
+            Kolor krawędzi przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.outerSelectedColor">
+            <summary>
+            Kolor krawędzi przycisku jeśli jest wybrany.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.innerColor">
+            <summary>
+            Kolor wnętrza przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.innerSelectedColor">
+            <summary>
+            Kolor wnętrza przycisku jeśli jest wybrany.
+            </summary>
+        </member>
+        <member name="F:Miner.Scenes.MenuItem.callback">
+            <summary>
+            Akcja wykonywana po wciśnięciu przycisku.
+            </summary>
+        </member>
+        <member name="M:Miner.Scenes.MenuItem.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.Scenes.MenuItem.Action">
+            <summary>
+            Metoda wywoływana po wciśnięciu przycisku. Uruchamia przekazany wcześniej callback.
+            </summary>
+        </member>
+        <member name="P:Miner.Scenes.MenuItem.Boundaries">
+            <summary>
+            Zwraca prostokąt wyznczający granice całego przycisku.
+            </summary>
+        </member>
+        <member name="P:Miner.Scenes.MenuItem.Text">
+            <summary>
+            Tekst na przycisku.
+            </summary>
+        </member>
+        <member name="P:Miner.Scenes.MenuItem.Selected">
+            <summary>
+            Flaga określająca, czy przycisk jest wybrany.
+            </summary>
+        </member>
+        <member name="F:Miner.HighScoreMenu.ListMenuItem.HORIZONTAL_PADDING">
+            <summary>
+            Poziomy padding.
+            </summary>
+        </member>
+        <member name="F:Miner.HighScoreMenu.ListMenuItem.VERTICAL_PADDING">
+            <summary>
+            Pionowy padding.
+            </summary>
+        </member>
+        <member name="T:Miner.HighScores">
+            <summary>
+            Klasa przechowująca informacje o najlepszych wynikach. Jest to singleton.
+            </summary>
+        </member>
+        <member name="F:Miner.HighScores.instance">
+            <summary>
+            Referencja na instancję singletona.
+            </summary>
+        </member>
+        <member name="M:Miner.HighScores.AddResult(Miner.Result)">
+            <summary>
+            Dodaje wynik do listy, zapewniając porządek malejący i maksymalną ilość.
+            </summary>
+            <param name="result">Wstawiany wynik</param>
+            <returns>Indeks porządkowy wstawionego wyniku</returns>
+        </member>
+        <member name="M:Miner.HighScores.ToString">
+            <summary>
+            Przeciążenie metody ToString(). 
+            </summary>
+            <returns>Łańcuch zawierający listę wyników wraz z liczbą porządkową oraz oddzielony znakami nowej linii.</returns>
+        </member>
+        <member name="M:Miner.HighScores.GetInstance">
+            <summary>
+            Zwraca, lub tworzy nową instancję singletona.
+            </summary>
+            <returns>Instacja singletona.</returns>
+        </member>
+        <member name="M:Miner.HighScores.SetInstance(Miner.HighScores)">
+            <summary>
+            Ustawia instancję singletona.
+            </summary>
+            <param name="hs">Obiekt, który stanie się nową instancją</param>
+        </member>
+        <member name="P:Miner.HighScores.HighScoreList">
+            <summary>
+            Lista przechowująca najlepsze wyniki. Implementacja klasy zapewnia, że są one posortowane
+            malejąco, oraz jest ich najwyżej 10.
+            </summary>
+        </member>
+        <member name="T:Miner.IActionUsable">
+            <summary>
+            Interfejs zapewniający możliwość bycia użytym przez gracza za pomocą przycisku akcji.
+            </summary>
+        </member>
+        <member name="M:Miner.IActionUsable.UseAction">
+            <summary>
+            Metoda wywoływana po wciśnięciu przez gracza przycisku akcji.
+            </summary>
+            <returns>Znaczenie zależne od implementacji.</returns>
+        </member>
+        <member name="T:Miner.IDiggable">
+            <summary>
+            Interfejs gwarantujący możliwość wykonania kopania.
+            </summary>
+        </member>
+        <member name="M:Miner.IDiggable.Dig">
+            <summary>
+            Metoda odpowiadająca za kopanie.
+            </summary>
+        </member>
+        <member name="T:Miner.IJumpable">
+            <summary>
+            Interfejs gwarantujący możliwość skakania.
+            </summary>
+        </member>
+        <member name="M:Miner.IJumpable.Jump">
+            <summary>
+            Metoda odpowiadająca za wykonanie przez postać skoku poprzez nadanie pionowego impulsu o wartości równej JumpImpulse.
+            </summary>
+        </member>
+        <member name="P:Miner.IJumpable.JumpImpulse">
+            <summary>
+            Pole określające wartość pionowo skierowanego impulsu nadanego w momencie skoku.
+            </summary>
+        </member>
+        <member name="T:Miner.Indestructibility">
+            <summary>
+            Klasa reprezentująca bonus "Niezniszczalność".
+            </summary>
+        </member>
+        <member name="F:Miner.Indestructibility.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="T:Miner.IRangeAttacker">
+            <summary>
+            Interfejs zapewniający możliwość zadawania obrażeń na odległość.
+            </summary>
+        </member>
+        <member name="M:Miner.IRangeAttacker.RangeAttack(Miner.ShootDirection,System.Int32)">
+            <summary>
+            Metoda wywoływana przez postać atakującą na odległość.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek strzału</param>
+            <param name="damage">Wartość zadanych obrażeń</param>
+            <returns>Obiekt pocisku stworzony w wyniku strzału</returns>
+        </member>
+        <member name="P:Miner.IRangeAttacker.RangedDamage">
+            <summary>
+            Pole określające wartość obrażeń zadawanych na odległość.
+            </summary>
+        </member>
+        <member name="T:Miner.Key">
+            <summary>
+            Klasa reprezentująca bonus "Klucz".
+            </summary>
+        </member>
+        <member name="F:Miner.Key.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="M:Miner.Key.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.Key.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.KeyLocalizer">
+            <summary>
+            Klasa reprezentująca bonus "Lokalizator kluczy"
+            </summary>
+        </member>
+        <member name="F:Miner.KeyLocalizer.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.KeyLocalizer.COOLDOWN">
+            <summary>
+            Czas w milisekundach, który trzeba odczekać pomiędzy kolejnymi użyciami bonusu.
+            </summary>
+        </member>
+        <member name="F:Miner.KeyLocalizer.currentCooldown">
+            <summary>
+            Liczba milisekund, która upłynęła od ostatniego użycia bonusu.
+            </summary>
+        </member>
+        <member name="M:Miner.KeyLocalizer.UseAction">
+            <summary>
+            Implementacja interfejsu IActionUsable. Metoda wywoływana po wciśnięciu przez gracza przycisku akcji.
+            </summary>
+            <returns>Zawsze 0</returns>
+        </member>
+        <member name="M:Miner.KeyLocalizer.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.Kosmojopek">
+            <summary>
+            Klasa reprezentująca przecwnika "Kosmojopek".
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.SPEED">
+            <summary>
+            Stała będąca domyślną wartością składowej X wektora prędkości.
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.JUMP_ON_HITS">
+            <summary>
+            Stała będąca domyślną ilością naskoków do zabicia.
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.LASER_HITS">
+            <summary>
+            Stała będąca domyślną liczbą trafien laserem do zabicia.
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.EXP_GAINED">
+            <summary>
+            Stała będąca domyślną ilością otrzymanego doświadczenia.
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.MAX_MOVE_SWITCH_TIME">
+            <summary>
+            Maksymalny czas (w milisekundach) po którym Kosmojopek zmieni kierunek ruchu.
+            </summary>
+        </member>
+        <member name="F:Miner.Kosmojopek.timeToSwitch">
+            <summary>
+            Licznik milisekund od ostatniej zmiany kierunku ruchu.
+            </summary>
+        </member>
+        <member name="M:Miner.Kosmojopek.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.Kosmojopek.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.Laser">
+            <summary>
+            Klasa reprezentująca bonus typu "Laser".
+            </summary>
+        </member>
+        <member name="F:Miner.Laser.LASER_DAMAGE">
+            <summary>
+            Stała będąca domyślną wartością obrażeń zadawanych przez laser.
+            </summary>
+        </member>
+        <member name="F:Miner.Laser.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Laser.COOLDOWN">
+            <summary>
+            Czas w milisekundach, który trzeba odczekać pomiędzy kolejnymi użyciami bonusu.
+            </summary>
+        </member>
+        <member name="F:Miner.Laser.currentCooldown">
+            <summary>
+            Liczba milisekund, która upłynęła od ostatniego użycia bonusu.
+            </summary>
+        </member>
+        <member name="M:Miner.Laser.UseAction">
+            <summary>
+            Implementacja interfejsu IActionUsable. Metoda wywoływana po wciśnięciu przez gracza przycisku akcji.
+            </summary>
+            <returns>Obrażenia zadane przez laser.</returns>
+        </member>
+        <member name="M:Miner.Laser.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.MainMenu">
+            <summary>
+            Klasa reprezentująca menu główne.
+            </summary>
+        </member>
+        <member name="F:Miner.MainMenu.START">
+            <summary>
+            Tekst na przycisku rozpoczynającym grę.
+            </summary>
+        </member>
+        <member name="F:Miner.MainMenu.LOAD_GAME">
+            <summary>
+            Tekst na przycisku pozwalającym na wczytanie gry.
+            </summary>
+        </member>
+        <member name="F:Miner.MainMenu.HIGH_SCORES">
+            <summary>
+            Tekst na przycisku prowadzącym do listy najlepszych wyników.
+            </summary>
+        </member>
+        <member name="F:Miner.MainMenu.SETTINGS">
+            <summary>
+            Tekst na przycisku prowadzącym do ustawień.
+            </summary>
+        </member>
+        <member name="F:Miner.MainMenu.EXIT">
+            <summary>
+            Tekst na przycisku wyjścia z gry.
+            </summary>
+        </member>
+        <member name="F:Miner.MainMenu.ERROR_READING_FILE">
+            <summary>
+            Tekst błędu wczytania pliku.
+            </summary>
+        </member>
+        <member name="T:Miner.MenuManager">
+            <summary>
+            Klasa odpowiedzialna za zarządzanie aktualnie wyświetlaną sceną. Jest singletonem.
+            </summary>
+        </member>
+        <member name="F:Miner.MenuManager.instance">
+            <summary>
+            Instacja singletona.
+            </summary>
+        </member>
+        <member name="M:Miner.MenuManager.GetInstance">
+            <summary>
+            Zwraca, lub tworzy nową instancję singletona.
+            </summary>
+            <returns>Instacja singletona.</returns>
+        </member>
+        <member name="P:Miner.MenuManager.CurrentMenu">
+            <summary>
+            Aktualnie wyświetlana scena.
+            </summary>
+        </member>
+        <member name="T:Miner.Miner">
+            <summary>
+            Klasa reprezentująca obiekt Minera - postaci sterowanej przez gracza.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.FUEL_PER_MOVE_EXPENDITURE">
+            <summary>
+            Stała określająca zużycie paliwa w jednostkach na ruch.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.JUMP_SPEED">
+            <summary>
+            Stała będąca domyślną wartością impulsu skoku.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.state">
+            <summary>
+            Zmienna określająca stan postaci.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.currentBonus">
+            <summary>
+            Referencja na aktualny bonus (null jeśli go nie ma).
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.digStartPosition">
+            <summary>
+            Zmienna przechowująca pozycje postaci w momencie rozpoczęcia kopania.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.gravity">
+            <summary>
+            Zmienna tylko do odczytu stanowiąca wektor przyśpieszenia grawitacji.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.OldKeyState">
+            <summary>
+            Zmienna przechowująca stan klawiatury po ostatnim wywołaniu metody Update. Używana, żeby zapobiec wielokrotnemu odczytaniu jednego przyciśnięcia.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.speed">
+            <summary>
+            Wartość impulsu prędkości dodawanego do składowej X prędkości przy wykonaniu ruchu.
+            </summary>
+        </member>
+        <member name="F:Miner.Miner.distanceTraveled">
+            <summary>
+            Przebyta droga. Pole używane do obliczenia wydatkowania paliwa. Zerowane gdy osiągnie szerokość pola.
+            </summary>
+        </member>
+        <member name="M:Miner.Miner.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.Miner.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.Miner.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.Miner.PrintState">
+            <summary>
+            Metoda pomocnicza, która wypisuje stan na konsolę.
+            </summary>
+        </member>
+        <member name="M:Miner.Miner.Jump">
+            <summary>
+            Implementacja interfejsu IJumpeable. Metoda odpowiadająca za wykonanie przez postać skoku poprzez nadanie pionowego impulsu o wartości równej JumpImpulse.
+            </summary>
+        </member>
+        <member name="M:Miner.Miner.Move(Miner.Direction)">
+            <summary>
+            Implementacja interfejsu IMoveable. Ruch obiektu w kierunku Direction.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek ruchu</param>
+        </member>
+        <member name="M:Miner.Miner.RangeAttack(Miner.ShootDirection,System.Int32)">
+            <summary>
+            Implementacja interfejsu IRangeAttacker. Metoda wywoływana przez postać atakującą na odległość.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek strzału</param>
+            <param name="damage">Wartość zadanych obrażeń</param>
+            <returns>Obiekt pocisku stworzony w wyniku strzału</returns>
+        </member>
+        <member name="M:Miner.Miner.Dig">
+            <summary>
+            Implementacja interfejsu IDiggable.
+            </summary>
+        </member>
+        <member name="P:Miner.Miner.LastMoveDirection">
+            <summary>
+            Kierunek ostatniego ruchu, używany do określenia strzału.
+            </summary>
+        </member>
+        <member name="P:Miner.Miner.Suit">
+            <summary>
+            Referencja na obiekt skafandra.
+            </summary>
+        </member>
+        <member name="P:Miner.Miner.Experience">
+            <summary>
+            Liczba punktów doświadczenia.
+            </summary>
+        </member>
+        <member name="P:Miner.Miner.ExpToNextLevel">
+            <summary>
+            Liczba punktów doświadczenia potrzebna do osiągnięcia następnego poziomu.
+            </summary>
+        </member>
+        <member name="P:Miner.Miner.RangedDamage">
+            <summary>
+            Implementacja interfejsu IRangedAttacker
+            </summary>
+        </member>
+        <member name="P:Miner.Miner.JumpImpulse">
+            <summary>
+            Implementacja interfejsu IJumpeable. Pole określające wartość pionowo skierowanego impulsu nadanego w momencie skoku.
+            </summary>
+        </member>
+        <member name="T:Miner.MoreEnemies">
+            <summary>
+            Klasa reprezentująca bonus typu "Zwiększona liczba wrogów".
+            </summary>
+        </member>
+        <member name="F:Miner.MoreEnemies.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="T:Miner.Nanosuit">
+            <summary>
+            Klasa reprezentująca skafander Minera.
+            </summary>
+        </member>
+        <member name="F:Miner.Nanosuit.fuel">
+            <summary>
+            Ilość paliwa.
+            </summary>
+        </member>
+        <member name="F:Miner.Nanosuit.durability">
+            <summary>
+            Wytrzymałość skafandra.
+            Jeśli spadnie do zera, gra kończy się porażką gracza.
+            </summary>
+        </member>
+        <member name="F:Miner.Nanosuit.maxFuel">
+            <summary>
+            Ilość paliwa.
+            </summary>
+        </member>
+        <member name="F:Miner.Nanosuit.maxDurability">
+            <summary>
+            Maksymalna wytrzymałość skafandra.
+            </summary>
+        </member>
+        <member name="M:Miner.Nanosuit.AddFuel(Miner.Fuel)">
+            <summary>
+            Metoda dodająca zdobytą ilość paliwa do zbiornika skafandra.
+            </summary>
+            <param name="fuel">Bonus typu "Paliwo" zdobyty przez gracza</param>
+        </member>
+        <member name="M:Miner.Nanosuit.IncreaseNanosuitLevel">
+            <summary>
+            Metoda wywoływana po zdobyciu ilości doświadczenia wystarczającej do zwiększenia poziomu.
+            Po jej wywołaniu maksymalna ilość paliwa oraz wytrzymałości jest przeskalowywana przez 1.5.
+            </summary>
+        </member>
+        <member name="P:Miner.Nanosuit.Fuel">
+            <summary>
+            Ilość paliwa.
+            </summary>
+        </member>
+        <member name="P:Miner.Nanosuit.Durability">
+            <summary>
+            Wytrzymałość skafandra.
+            Jeśli spadnie do zera, gra kończy się porażką gracza.
+            </summary>
+        </member>
+        <member name="P:Miner.Nanosuit.MaxFuel">
+            <summary>
+            Ilość paliwa.
+            </summary>
+        </member>
+        <member name="P:Miner.Nanosuit.MaxDurability">
+            <summary>
+            Maksymalna wytrzymałość skafandra.
+            </summary>
+        </member>
+        <member name="T:Miner.PauseMenu">
+            <summary>
+            Klasa odpowiedzialna za menu dostępne w czasie pauzy.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.RESUME">
+            <summary>
+            Tekst na przycisku wznawiającym grę.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.SAVE_GAME">
+            <summary>
+            Tekst na przycisku pozwalającym na zapisanie gry.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.LOAD_GAME">
+            <summary>
+            Tekst na przycisku pozwalającym na wczytanie gry.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.INSTRUCTIONS">
+            <summary>
+            Tekst na przycisku wyświetlającym instrukcje.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.SETTINGS">
+            <summary>
+            Tekst na przycisku prowadzącym do ustawień.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.EXIT_MAIN_MENU">
+            <summary>
+            Tekst na przycisku wyjścia do menu głównego.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.EXIT_GAME">
+            <summary>
+            Tekst na przycisku wyjścia z gry.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.ERROR_READING_FILE">
+            <summary>
+            Tekst błędu wczytania pliku.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.MENU_ITEM_HEIGHT">
+            <summary>
+            Stała określająca domyślną wysokośc przycisku w tej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.PauseMenu.GAP">
+            <summary>
+            Stała określająca przerwę między przyciskami w tej scenie.
+            </summary>
+        </member>
+        <member name="T:Miner.PoteznySultan">
+            <summary>
+            Klasa reprezentująca przeciwnika "Potężny Sułtan" - najpotężniejszego i ostatniego przeciwnika.
+            </summary>
+        </member>
+        <member name="F:Miner.PoteznySultan.JUMP_SPEED">
+            <summary>
+            Stała będąca domyślną wartością impulsu skoku.
+            </summary>
+        </member>
+        <member name="F:Miner.PoteznySultan.EXP_GAINED">
+            <summary>
+            Stała będąca domyślną ilością otrzymanego doświadczenia.
+            </summary>
+        </member>
+        <member name="M:Miner.PoteznySultan.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.PoteznySultan.RangeAttack(Miner.ShootDirection,System.Int32)">
+            <summary>
+            Implementacja interfejsu IRangeAttacker. Metoda wywoływana przez postać atakującą na odległość.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek strzału</param>
+            <param name="damage">Wartość zadanych obrażeń</param>
+            <returns>Obiekt pocisku stworzony w wyniku strzału</returns>
+        </member>
+        <member name="M:Miner.PoteznySultan.Jump">
+            <summary>
+            Implementacja interfejsu IJumpeable. Metoda odpowiadająca za wykonanie przez postać skoku poprzez nadanie pionowego impulsu o wartości równej JumpImpulse.
+            </summary>
+        </member>
+        <member name="M:Miner.PoteznySultan.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="M:Miner.PoteznySultan.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="P:Miner.PoteznySultan.JumpImpulse">
+            <summary>
+            Implementacja interfejsu IJumpeable. Pole określające wartość pionowo skierowanego impulsu nadanego w momencie skoku.
+            </summary>
+        </member>
+        <member name="T:Miner.MinerGame">
+            <summary>
+            Główna klasa gry.
+            </summary>
+        </member>
+        <member name="F:Miner.MinerGame.menuManager">
+            <summary>
+            Pole służące do zmiany aktualnie wyświetlanego menu.
+            </summary>
+        </member>
+        <member name="M:Miner.MinerGame.Initialize">
+            <summary>
+            Allows the game to perform any initialization it needs to before starting to run.
+            This is where it can query for any required services and load any non-graphic
+            related content.  Calling base.Initialize will enumerate through any components
+            and initialize them as well.
+            </summary>
+        </member>
+        <member name="M:Miner.MinerGame.LoadContent">
+            <summary>
+            LoadContent will be called once per game and is the place to load
+            all of your content.
+            </summary>
+        </member>
+        <member name="M:Miner.MinerGame.UnloadContent">
+            <summary>
+            UnloadContent will be called once per game and is the place to unload
+            all content.
+            </summary>
+        </member>
+        <member name="M:Miner.MinerGame.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the game to run logic such as updating the world,
+            checking for collisions, gathering input, and playing audio.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:Miner.MinerGame.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            This is called when the game should draw itself.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:Miner.MinerGame.ExitGame">
+            <summary>
+            Wychodzi z gry zapisując uprzednio ustawienia gracza.
+            </summary>
+        </member>
+        <member name="P:Miner.MinerGame.GameState">
+            <summary>
+            Pole przechowujące stan gry.
+            </summary>
+        </member>
+        <member name="P:Miner.MinerGame.Settings">
+            <summary>
+            Pole stanowiące referencje do obiektu ustawień.
+            </summary>
+        </member>
+        <member name="T:Miner.Result">
+            <summary>
+            Klasa przechowująca pojedynczy wpis wyniku. Zawiera informacje o wyniku oraz jego autorze.
+            </summary>
+        </member>
+        <member name="P:Miner.Result.PlayerName">
+            <summary>
+            Imię gracza, który osiągnął zapisany w obiekcie tej klasy wynik.
+            </summary>
+        </member>
+        <member name="P:Miner.Result.Score">
+            <summary>
+            Wartość wyniku.
+            </summary>
+        </member>
+        <member name="T:Miner.Settings">
+            <summary>
+            Klasa przechowująca informacje o ustawieniach gry. Jest to singleton.
+            </summary>
+        </member>
+        <member name="F:Miner.Settings.instance">
+            <summary>
+            Referencja na instancję singletona.
+            </summary>
+        </member>
+        <member name="M:Miner.Settings.GetInstance">
+            <summary>
+            Zwraca, lub tworzy nową instancję singletona.
+            </summary>
+            <returns>Instacja singletona.</returns>
+        </member>
+        <member name="P:Miner.Settings.Controls">
+            <summary>
+            Pole przechowujące informacje o ustawieniach związanych ze sterowaniem.
+            </summary>
+        </member>
+        <member name="P:Miner.Settings.Sound">
+            <summary>
+            Pole przechowujące informacje o ustawieniach związanych z dźwiękiem.
+            </summary>
+        </member>
+        <member name="T:Miner.SettingsMenu">
+            <summary>
+            Klasa odpowiedzialna za menu ustawień.
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.LABEL_CONTROLS">
+            <summary>
+            Tekst na etykiecie tytułowej.
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.KEY_UP">
+            <summary>
+            Tekst na przycisku zmiany wartości przycisku "Góra".
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.KEY_DOWN">
+            <summary>
+            Tekst na przycisku zmiany wartości przycisku "Dół".
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.KEY_LEFT">
+            <summary>
+            Tekst na przycisku zmiany wartości przycisku "Lewo".
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.KEY_RIGHT">
+            <summary>
+            Tekst na przycisku zmiany wartości przycisku "Prawo".
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.KEY_ACTION">
+            <summary>
+            Tekst na przycisku zmiany wartości przycisku "Akcja".
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.LEFT_MARGIN">
+            <summary>
+            Stała określająca domyślną wartość lewego marginesu w tej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.MENU_ITEM_HEIGHT">
+            <summary>
+            Stała określająca domyślną wysokośc przycisku w tej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.GAP">
+            <summary>
+            Stała określająca przerwę między przyciskami w tej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.changingKey">
+            <summary>
+            Flaga określająca, czy aktualnie jest zmieniana wartość jakiego przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.SettingsMenu.label">
+            <summary>
+            Etykieta tytułowa.
+            </summary>
+        </member>
+        <member name="M:Miner.SettingsMenu.ChangeKey">
+            <summary>
+            Metoda wywoływana, gdy użytkownik wyraża wolę zmiany wartości przycisku.
+            </summary>
+        </member>
+        <member name="M:Miner.SettingsMenu.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.SettingsMenu.ProperKey(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Metoda określająca, czy wartość przycisku może być zmieniona na tę, podaną przez użytkownika.
+            Jest to możliwe tylko wtedy, gdy podany przez przeciwnika klawisz, nie jest już ustawiony na inną akcję.
+            </summary>
+            <param name="selectedKey">Wybrany przez przeciwnika klawisz</param>
+            <returns></returns>
+        </member>
+        <member name="M:Miner.SettingsMenu.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="T:Miner.ShootDirection">
+            <summary>
+            Wyliczenie określające kierunku strzału.
+            </summary>
+        </member>
+        <member name="T:Miner.SolidRock">
+            <summary>
+            Klasa reprezentująca pole typu "Lita skała".
+            </summary>
+        </member>
+        <member name="F:Miner.SolidRock.ASSET_NAME">
+            <summary>
+            Nazwa pliku stanowiącego obrazek tego obiektu.
+            </summary>
+        </member>
+        <member name="M:Miner.SolidRock.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.SolidRock.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="T:Miner.Sound">
+            <summary>
+            Klasa przechowująca informacje związane z dźwiękiem.
+            </summary>
+        </member>
+        <member name="P:Miner.Sound.SoundEffects">
+            <summary>
+            Pole przechowujące informacje o wł./wył. efektów dźwiękowych.
+            </summary>
+        </member>
+        <member name="P:Miner.Sound.Music">
+            <summary>
+            Pole przechowujące informacje o wł./wył. muzyki.
+            </summary>
+        </member>
+        <member name="T:Miner.SpaceGate">
+            <summary>
+            Klasa reprezentująca pole typu "Kosmiczne wrota".
+            </summary>
+        </member>
+        <member name="F:Miner.SpaceGate.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="M:Miner.SpaceGate.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="T:Miner.StartMenu">
+            <summary>
+            Klasa odpowiedzialna za menu startowe (logowania).
+            </summary>
+        </member>
+        <member name="F:Miner.StartMenu.LABEL_TITLE">
+            <summary>
+            Napis tytułowy
+            </summary>
+        </member>
+        <member name="F:Miner.StartMenu.FONT_ASSET">
+            <summary>
+            Ścieżka do czcionki użytej na tej scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.StartMenu.font">
+            <summary>
+            Czcionka napisów na przycisku.
+            </summary>
+        </member>
+        <member name="F:Miner.StartMenu.inputNaturalPosition">
+            <summary>
+            Pozycja tekstu wpisywanego przez uzytkownika.
+            </summary>
+        </member>
+        <member name="M:Miner.StartMenu.IsKeyAChar(Microsoft.Xna.Framework.Input.Keys)">
+            <summary>
+            Sprawdza, czy wciśnięty przycisk jest literą.
+            </summary>
+            <param name="key">Wciśnięty klucz</param>
+            <returns></returns>
+        </member>
+        <member name="M:Miner.StartMenu.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.StartMenu.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Metoda odpowiadająca za renderowanie obiektu na ekranie.
+            </summary>
+            <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
+        </member>
+        <member name="P:Miner.StartMenu.PlayerName">
+            <summary>
+            Podane przez użytkownika imię gracza.
+            </summary>
+        </member>
+        <member name="T:Miner.TitanRock">
+            <summary>
+            Klasa reprezentująca pole typu "Kosmiczne wrota".
+            </summary>
+        </member>
+        <member name="F:Miner.TitanRock.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="M:Miner.TitanRock.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="T:Miner.Ufolowca">
+            <summary>
+            Klasa reprezentująca przecwnika "Ufołowca".
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.JUMP_SPEED">
+            <summary>
+            Stała będąca domyślną wartością impulsu skoku.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.JUMP_ON_HITS">
+            <summary>
+            Stała będąca domyślną ilością naskoków do zabicia.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.LASER_HITS">
+            <summary>
+            Stała będąca domyślną liczbą trafien laserem do zabicia.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.EXP_GAINED">
+            <summary>
+            Stała będąca domyślną ilością otrzymanego doświadczenia.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.MAX_MOVE_SWITCH_TIME">
+            <summary>
+            Maksymalny czas (w milisekundach) po którym Kosmojopek zmieni kierunek ruchu.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.SPEED">
+            <summary>
+            Stała będąca domyślną wartością składowej X wektora prędkości.
+            </summary>
+        </member>
+        <member name="F:Miner.Ufolowca.timeToSwitch">
+            <summary>
+            Licznik milisekund od ostatniej zmiany kierunku ruchu.
+            </summary>
+        </member>
+        <member name="M:Miner.Ufolowca.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.Ufolowca.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.Ufolowca.Jump">
+            <summary>
+            Implementacja interfejsu IJumpeable. Metoda odpowiadająca za wykonanie przez postać skoku poprzez nadanie pionowego impulsu o wartości równej JumpImpulse.
+            </summary>
+        </member>
+        <member name="P:Miner.Ufolowca.JumpImpulse">
+            <summary>
+            Implementacja interfejsu IJumpeable. Pole określające wartość pionowo skierowanego impulsu nadanego w momencie skoku.
+            </summary>
+        </member>
+        <member name="T:Miner.State">
+            <summary>
+            Wyliczenie określające stan obiektu. Jego wartość mówi, czy obiekt stoi na ziemi, skacze, swobodnie spada lub kopie.
+            </summary>
+        </member>
+        <member name="T:Miner.User">
+            <summary>
+            Klasa reprezentująca użytkownika.
+            </summary>
+        </member>
+        <member name="P:Miner.User.Name">
+            <summary>
+            Imię gracza
+            </summary>
+        </member>
+        <member name="P:Miner.User.Score">
+            <summary>
+            Aktualny wynik gracza.
+            </summary>
+        </member>
+        <member name="T:Miner.WladcaLaserowejDzidy">
+            <summary>
+            Klasa reprezentująca przecwnika "Władca Laserowej Dzidy".
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.ASSET_NAME">
+            <summary>
+            Ścieżka do obrazka reprezentującego obiekt na scenie.
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.JUMP_ON_HITS">
+            <summary>
+            Stała będąca domyślną ilością naskoków do zabicia.
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.LASER_HITS">
+            <summary>
+            Stała będąca domyślną liczbą trafien laserem do zabicia.
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.EXP_GAINED">
+            <summary>
+            Stała będąca domyślną ilością otrzymanego doświadczenia.
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.MAX_MOVE_SWITCH_TIME">
+            <summary>
+            Maksymalny czas (w milisekundach) po którym Kosmojopek zmieni kierunek ruchu.
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.SPEED">
+            <summary>
+            Stała będąca domyślną wartością składowej X wektora prędkości.
+            </summary>
+        </member>
+        <member name="F:Miner.WladcaLaserowejDzidy.timeToSwitch">
+            <summary>
+            Licznik milisekund od ostatniej zmiany kierunku ruchu.
+            </summary>
+        </member>
+        <member name="M:Miner.WladcaLaserowejDzidy.#ctor">
+            <summary>
+            Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
+            </summary>
+        </member>
+        <member name="M:Miner.WladcaLaserowejDzidy.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Metoda odpowiadająca za uaktualnienie stanu związanego z obiektem.
+            </summary>
+            <param name="gameTime">Czas, jaki upłynął od ostatniego wywołania tej metody.</param>
+        </member>
+        <member name="M:Miner.WladcaLaserowejDzidy.Jump">
+            <summary>
+            Implementacja interfejsu IJumpeable. Metoda odpowiadająca za wykonanie przez postać skoku poprzez nadanie pionowego impulsu o wartości równej JumpImpulse.
+            </summary>
+        </member>
+        <member name="M:Miner.WladcaLaserowejDzidy.RangeAttack(Miner.ShootDirection,System.Int32)">
+            <summary>
+            Implementacja interfejsu IRangeAttacker. Metoda wywoływana przez postać atakującą na odległość.
+            </summary>
+            <param name="direction">Wyliczenie określające kierunek strzału</param>
+            <param name="damage">Wartość zadanych obrażeń</param>
+            <returns>Obiekt pocisku stworzony w wyniku strzału</returns>
+        </member>
+        <member name="P:Miner.WladcaLaserowejDzidy.JumpImpulse">
+            <summary>
+            Implementacja interfejsu IJumpeable. Pole określające wartość pionowo skierowanego impulsu nadanego w momencie skoku.
+            </summary>
+        </member>
+    </members>
+</doc>
