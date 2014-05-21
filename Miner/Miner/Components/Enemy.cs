@@ -167,15 +167,51 @@ namespace Miner
             Vector2 oldPosition = this.Position;
             Position += Velocity * time;
 
-            Field topLeft = game.GameState.Map.Fields[(int)Position.X / Field.FieldWidth][(int)Position.Y / Field.FieldHeight];
-            Field topRight = game.GameState.Map.Fields[(int)(Position.X + this.Width) / Field.FieldWidth][(int)Position.Y / Field.FieldHeight];
-            Field bottomRight = game.GameState.Map.Fields[(int)(Position.X + this.Width) / Field.FieldWidth][(int)(Position.Y + this.Height - 10f) / Field.FieldHeight];
-            Field bottomLeft = game.GameState.Map.Fields[(int)Position.X / Field.FieldWidth][(int)(Position.Y + this.Height - 10f) / Field.FieldHeight];
+            //Field topLeft = game.GameState.Map.Fields[(int)Position.X / Field.FieldWidth][(int)Position.Y / Field.FieldHeight];
+            //Field topRight = game.GameState.Map.Fields[(int)(Position.X + this.Width) / Field.FieldWidth][(int)Position.Y / Field.FieldHeight];
+            //Field bottomRight = game.GameState.Map.Fields[(int)(Position.X + this.Width) / Field.FieldWidth][(int)(Position.Y + this.Height - 10f) / Field.FieldHeight];
+            //Field bottomLeft = game.GameState.Map.Fields[(int)Position.X / Field.FieldWidth][(int)(Position.Y + this.Height - 10f) / Field.FieldHeight];
 
-            if ((!topLeft.IsEmpty || !topRight.IsEmpty) || (state != State.OnGround && (!bottomLeft.IsEmpty || !bottomRight.IsEmpty)))
+            //if ((!topLeft.IsEmpty || !topRight.IsEmpty) || (state != State.OnGround && (!bottomLeft.IsEmpty || !bottomRight.IsEmpty)))
+            //{
+            //    Position = new Vector2(oldPosition.X, Position.Y);
+            //    LastMoveDirection = (LastMoveDirection == Direction.left) ? Direction.right : Direction.left;
+            //}
+
+            int topLeftX = (int)Position.X / Field.FieldWidth;
+            int topLeftY = (int)Position.Y / Field.FieldHeight;
+            int topRightX = (int)(Position.X + this.Width) / Field.FieldWidth;
+            int topRightY = (int)Position.Y / Field.FieldHeight;
+            int bottomLeftX = (int)Position.X / Field.FieldWidth;
+            int bottomLeftY = (int)(Position.Y + this.Height - 10f) / Field.FieldHeight;
+            int bottomRightX = (int)(Position.X + this.Width) / Field.FieldWidth;
+            int bottomRightY = (int)(Position.Y + this.Height - 10f) / Field.FieldHeight;
+
+            Field topLeft = (topLeftX >= 0 && topLeftY >= 0 && topLeftX < game.GameState.Map.Fields.Length && topLeftY < game.GameState.Map.Fields[0].Length) ?
+                game.GameState.Map.Fields[topLeftX][topLeftY] : null;
+            Field topRight = (topRightX >= 0 && topRightY >= 0 && topRightX < game.GameState.Map.Fields.GetLength(0) && topRightY < game.GameState.Map.Fields[0].Length) ?
+                game.GameState.Map.Fields[topRightX][topRightY] : null;
+            Field bottomRight = (bottomRightX >= 0 && bottomRightY >= 0 && bottomRightX < game.GameState.Map.Fields.GetLength(0) && bottomRightY < game.GameState.Map.Fields[0].Length) ?
+                game.GameState.Map.Fields[bottomRightX][bottomRightY] : null;
+            Field bottomLeft = (bottomLeftX >= 0 && bottomLeftY >= 0 && bottomLeftX < game.GameState.Map.Fields.GetLength(0) && bottomLeftY < game.GameState.Map.Fields[0].Length) ?
+                game.GameState.Map.Fields[bottomLeftX][bottomLeftY] : null;
+
+            if (((topLeft == null || topRight == null || bottomLeft == null || bottomRight == null) ||
+                (!topLeft.IsEmpty || !topRight.IsEmpty)) ||
+                (state != State.OnGround && (!bottomLeft.IsEmpty || !bottomRight.IsEmpty)))
             {
-                Position = new Vector2(oldPosition.X, Position.Y);
                 LastMoveDirection = (LastMoveDirection == Direction.left) ? Direction.right : Direction.left;
+                if (oldPosition.X < 0)
+                {
+                    oldPosition.X = 0;
+                    LastMoveDirection = Direction.left;
+                }
+                if (oldPosition.X >= Field.FieldWidth * GameMap.DEF_WIDTH)
+                {
+                    oldPosition.X = Field.FieldWidth * GameMap.DEF_WIDTH - this.Width;
+                    LastMoveDirection = Direction.right;
+                }
+                Position = new Vector2(oldPosition.X, Position.Y);
             }
 
             if (state != State.Digging)

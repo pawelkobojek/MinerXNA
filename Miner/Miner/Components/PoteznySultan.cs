@@ -19,6 +19,11 @@ namespace Miner
         private const float JUMP_SPEED = -230.0f;
 
         /// <summary>
+        /// Stała będąca domyślną ilością otrzymanego doświadczenia.
+        /// </summary>
+        private const int EXP_GAINED = 100;
+
+        /// <summary>
         /// Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
         /// </summary>
         private PoteznySultan() { }

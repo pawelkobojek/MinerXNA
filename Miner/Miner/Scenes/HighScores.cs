@@ -69,7 +69,6 @@ namespace Miner
             return sb.ToString();
         }
 
-
         /// <summary>
         /// Zwraca, lub tworzy nową instancję singletona.
         /// </summary>
@@ -82,6 +81,15 @@ namespace Miner
             }
 
             return instance;
+        }
+
+        /// <summary>
+        /// Ustawia instancję singletona.
+        /// </summary>
+        /// <param name="hs">Obiekt, który stanie się nową instancją</param>
+        public static void SetInstance(HighScores hs)
+        {
+            instance = hs;
         }
     }
 }

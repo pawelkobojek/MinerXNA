@@ -19,6 +19,10 @@ namespace Miner
         /// Stała określająca zużycie paliwa w jednostkach na ruch.
         /// </summary>
         public const int FUEL_PER_MOVE_EXPENDITURE = 1;
+
+        /// <summary>
+        /// Ścieżka do obrazka reprezentującego obiekt na scenie.
+        /// </summary>
         public const string ASSET_NAME = "miner";
 
         /// <summary>
@@ -65,7 +69,7 @@ namespace Miner
         /// <summary>
         /// Stała będąca domyślną wartością impulsu skoku.
         /// </summary>
-        private const float JUMP_SPEED = -230.0f;
+        private const float JUMP_SPEED = -250.0f;
 
         /// <summary>
         /// Liczba punktów doświadczenia.
@@ -76,6 +80,11 @@ namespace Miner
         /// Liczba punktów doświadczenia potrzebna do osiągnięcia następnego poziomu.
         /// </summary>
         public int ExpToNextLevel { get; private set; }
+
+        /// <summary>
+        /// Przebyta droga. Pole używane do obliczenia wydatkowania paliwa. Zerowane gdy osiągnie szerokość pola.
+        /// </summary>
+        private float distanceTraveled = 0.0f;
 
         /// <summary>
         /// Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
@@ -180,6 +189,19 @@ namespace Miner
 
             Vector2 oldPosition = this.Position;
             Position += Velocity * time;
+
+            distanceTraveled += Math.Abs(Position.X - oldPosition.X);
+            if (distanceTraveled >= Field.FieldWidth)
+            {
+                distanceTraveled = 0.0f;
+                this.Suit.Fuel -= FUEL_PER_MOVE_EXPENDITURE;
+                this.game.GameState.User.Score += FUEL_PER_MOVE_EXPENDITURE;
+
+                if (Suit.Fuel <= 0)
+                {
+                    this.game.ExitGame();
+                }
+            }
 
             int topLeftX = (int)Position.X / Field.FieldWidth;
             int topLeftY = (int)Position.Y / Field.FieldHeight;
@@ -456,6 +478,9 @@ namespace Miner
             }
         }
 
+        /// <summary>
+        /// Implementacja interfejsu IRangedAttacker
+        /// </summary>
         public int RangedDamage
         {
             get;

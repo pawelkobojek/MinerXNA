@@ -144,6 +144,10 @@ namespace Miner
                         {
                             game.GameState.Enemies.Remove(game.GameState.Enemies[i]);
                         }
+                        if (game.GameState.Miner.CollidesWith(this))
+                        {
+                            game.ExitGame();
+                        }
                     }
                     IsDigged = false;
                     IsEmpty = false;

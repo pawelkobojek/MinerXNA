@@ -64,8 +64,8 @@ namespace Miner
             this.GameState.Miner = new Miner(this);
             this.GameState.CurrentLevel = 1;
 
-            //this.menuManager.CurrentMenu = new StartMenu(this);
-            this.menuManager.CurrentMenu = new MainMenu(this);
+            this.menuManager.CurrentMenu = new StartMenu(this);
+            //this.menuManager.CurrentMenu = new MainMenu(this);
             if (File.Exists(SETTINGS_PATH))
             {
                 using (FileStream file = new FileStream(SETTINGS_PATH, FileMode.Open))
@@ -80,8 +80,7 @@ namespace Miner
                 using (FileStream file = new FileStream(HIGHSCORE_PATH, FileMode.Open))
                 {
                     XmlSerializer xml = new XmlSerializer(typeof(HighScores));
-                    HighScores hs = HighScores.GetInstance();
-                    hs = (HighScores)xml.Deserialize(file);
+                    HighScores.SetInstance((HighScores)xml.Deserialize(file));
                 }
             }
         }

@@ -16,21 +16,52 @@ namespace Miner
     public class StartMenu : MenuScene
     {
         /// <summary>
+        /// Napis tytułowy
+        /// </summary>
+        private const string LABEL_TITLE = "Podaj imie:";
+
+        /// <summary>
         /// Podane przez użytkownika imię gracza.
         /// </summary>
         public string PlayerName { get; set; }
 
+        /// <summary>
+        /// Czcionka napisów na przycisku.
+        /// </summary>
+        protected SpriteFont font;
+
+        /// <summary>
+        /// Ścieżka do czcionki użytej na tej scenie.
+        /// </summary>
+        private const string FONT_ASSET = "general";
+
+        /// <summary>
+        /// Pozycja tekstu wpisywanego przez uzytkownika.
+        /// </summary>
+        protected Vector2 inputNaturalPosition = Vector2.Zero;
+
         public StartMenu(MinerGame game)
             : base(game)
         {
+            PlayerName = "";
 
-            //menuItems.Add(new MenuItem(game, new Rectangle(Game.GraphicsDevice.Viewport.Width / 2 - HEIGHT,
-            //        Game.GraphicsDevice.Viewport.Height / 2 - 300, WIDTH, HEIGHT), "yes"));
 
-            //menuItems.Add(new MenuItem(game, new Rectangle(Game.GraphicsDevice.Viewport.Width / 2 - HEIGHT,
-            //        Game.GraphicsDevice.Viewport.Height / 2 - 150, WIDTH, HEIGHT), "no"));
+            font = this.Game.Content.Load<SpriteFont>(FONT_ASSET);
 
-            MenuItems[currentlySelected].Selected = true;
+            MenuItems.Add(new MenuItem(this, new Rectangle(Game.GraphicsDevice.Viewport.Width / 2 - MENU_ITEM_WIDTH / 2,
+                    Game.GraphicsDevice.Viewport.Height / 2 - 150, MENU_ITEM_WIDTH, MENU_ITEM_HEIGHT), LABEL_TITLE, null));
+
+            MenuItems[currentlySelected].Selected = false;
+        }
+
+        /// <summary>
+        /// Sprawdza, czy wciśnięty przycisk jest literą.
+        /// </summary>
+        /// <param name="key">Wciśnięty klucz</param>
+        /// <returns></returns>
+        private static bool IsKeyAChar(Keys key)
+        {
+            return key >= Keys.A && key <= Keys.Z;
         }
 
         /// <summary>
@@ -40,22 +71,30 @@ namespace Miner
         public override void Update(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.S) && !OldKeyState.IsKeyDown(Keys.S))
+            if (keyState.GetPressedKeys().Length == 0)
             {
-                MenuItems[currentlySelected].Selected = false;
-
-                currentlySelected = (currentlySelected + 1 >= MenuItems.Count) ? 0 : currentlySelected + 1;
-
-                MenuItems[currentlySelected].Selected = true;
+                OldKeyState = keyState;
+                return;
             }
-            else if (keyState.IsKeyDown(Keys.W) && !OldKeyState.IsKeyDown(Keys.W))
+            Keys pressedKey = Keyboard.GetState().GetPressedKeys()[0];
+            if (IsKeyAChar(pressedKey) && !OldKeyState.IsKeyDown(pressedKey))
             {
-                MenuItems[currentlySelected].Selected = false;
+                PlayerName += pressedKey.ToString();
+            }
 
-                currentlySelected = (currentlySelected - 1 < 0) ? MenuItems.Count - 1 : currentlySelected - 1;
+            if (pressedKey == Keys.Enter)
+            {
+                this.Game.GameState.User = new User
+                {
+                    Name = PlayerName,
+                    Score = 0
+                };
 
-                MenuItems[currentlySelected].Selected = true;
+                MainMenu newMenu = new MainMenu(this.Game)
+                {
+                    OldKeyState = keyState
+                };
+                MenuManager.GetInstance().CurrentMenu = newMenu;
             }
 
             OldKeyState = keyState;
@@ -71,6 +110,12 @@ namespace Miner
             {
                 item.Draw(spriteBatch);
             }
+
+            Vector2 textDim = font.MeasureString(PlayerName);
+            inputNaturalPosition = new Vector2(Game.GraphicsDevice.Viewport.Width / 2 - textDim.X / 2,
+                Game.GraphicsDevice.Viewport.Height / 2 - textDim.Y / 2);
+
+            spriteBatch.DrawString(font, PlayerName, inputNaturalPosition, Color.Black);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Miner
     /// </summary>
     public class SettingsMenu : MenuScene
     {
+        #region constants
         /// <summary>
         /// Tekst na etykiecie tytułowej.
         /// </summary>
@@ -52,6 +53,7 @@ namespace Miner
         /// Stała określająca przerwę między przyciskami w tej scenie.
         /// </summary>
         private new const int GAP = 40;
+        #endregion
 
         /// <summary>
         /// Flaga określająca, czy aktualnie jest zmieniana wartość jakiego przycisku.

@@ -25,6 +25,11 @@ namespace Miner
         private SpriteFont font;
         private Vector2 barPosition = Vector2.Zero;
 
+        /// <summary>
+        /// Numer ostatniego poziomu.
+        /// </summary>
+        private const int LAST_LEVEL = 4;
+
         public GameScene(MinerGame game)
             : base(game)
         {
@@ -54,6 +59,12 @@ namespace Miner
 
             if (this.Game.GameState.LevelCompleted)
             {
+                if (this.Game.GameState.CurrentLevel == LAST_LEVEL)
+                {
+                    this.Game.ExitGame();
+                    return;
+                }
+
                 this.Game.GameState.LevelCompleted = false;
                 this.Game.GameState.GatesOpen = false;
                 ++this.Game.GameState.CurrentLevel;
@@ -81,7 +92,11 @@ namespace Miner
                 int y = 0;
                 for (; y < GameMap.DEF_HEIGHT - 1 && Game.GameState.Map.Fields[x][y++].IsEmpty; ) ;
 
-                this.Game.GameState.Map.Fields[x][y - 2].Bonus = BonusItem.CreateRandomBonus(this.Game, x, y - 2);
+                if (this.Game.GameState.Map.Fields[x][y - 2].Bonus == null ||
+                    this.Game.GameState.Map.Fields[x][y - 2].Bonus.GetType() != typeof(Key))
+                {
+                    this.Game.GameState.Map.Fields[x][y - 2].Bonus = BonusItem.CreateRandomBonus(this.Game, x, y - 2);
+                }
                 this.bonusSpawnTime = 0;
             }
 
@@ -111,11 +126,12 @@ namespace Miner
         /// <param name="spriteBatch">Referencja na SpriteBatch, na którym obiekt będzie rysowany.</param>
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, String.Format("Health: {0}/{1}    Fuel: {2}/{3}    Exp: {4}/{5}    Points: {6}",
+            spriteBatch.DrawString(font, String.Format("Health: {0}/{1}    Fuel: {2}/{3}    Exp: {4}/{5}    Points: {6}    Keys: {7}/{8}",
                 this.Game.GameState.Miner.Suit.Durability, this.Game.GameState.Miner.Suit.MaxDurability,
                 this.Game.GameState.Miner.Suit.Fuel, this.Game.GameState.Miner.Suit.MaxFuel,
                 this.Game.GameState.Miner.Experience, this.Game.GameState.Miner.ExpToNextLevel,
-                this.Game.GameState.User.Score), barPosition, Color.Black);
+                this.Game.GameState.User.Score,
+                this.Game.GameState.Keys.Count, this.Game.GameState.CurrentLevel + 2), barPosition, Color.Black);
 
             foreach (var firstDim in this.Game.GameState.Map.Fields)
             {

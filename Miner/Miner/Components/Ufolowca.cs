@@ -38,7 +38,7 @@ namespace Miner
         /// <summary>
         /// Stała będąca domyślną ilością otrzymanego doświadczenia.
         /// </summary>
-        private const int EXP_GAINED = 10;
+        private const int EXP_GAINED = 30;
         /// <summary>
         /// Maksymalny czas (w milisekundach) po którym Kosmojopek zmieni kierunek ruchu.
         /// </summary>
