@@ -23,6 +23,8 @@ namespace Miner
         /// </summary>
         public const string ASSET_NAME = "Bonuses/fuel";
 
+        private Fuel() { }
+
         public Fuel(int amount)
         {
             this.Amount = amount;
@@ -35,6 +37,15 @@ namespace Miner
             this.sprite = game.Content.Load<Texture2D>(ASSET_NAME);
             this.LifeTime = 30000;
             this.RemainingLifeTime = this.LifeTime;
+        }
+
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public override string GetAssetName()
+        {
+            return ASSET_NAME;
         }
     }
 }

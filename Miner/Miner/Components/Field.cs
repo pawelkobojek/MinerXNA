@@ -173,5 +173,14 @@ namespace Miner
             this.IsEmpty = true;
             this.digTime = DIG_TIME;
         }
+
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public override string GetAssetName()
+        {
+            return ASSET_NAME;
+        }
     }
 }

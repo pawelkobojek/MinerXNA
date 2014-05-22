@@ -34,8 +34,14 @@ namespace Miner
         /// </summary>
         public Settings Settings { get; set; }
 
+        /// <summary>
+        /// Flaga mówiąca o tym, czy proces wychodzenia z gry jest w trakcie.
+        /// Używana by zapobiec wielokrotnemu zapisaniu wyniku.
+        /// </summary>
+        private bool exitting = false;
+
         private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
 
         public MinerGame()
         {
@@ -123,6 +129,7 @@ namespace Miner
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            this.Content.Unload();
         }
 
         /// <summary>
@@ -163,6 +170,11 @@ namespace Miner
         /// </summary>
         public void ExitGame()
         {
+            if (exitting)
+            {
+                return;
+            }
+            exitting = true;
             using (FileStream fs = new FileStream(SETTINGS_PATH, FileMode.Create))
             {
                 XmlSerializer xml = new XmlSerializer(typeof(Settings));

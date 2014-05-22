@@ -98,8 +98,19 @@ namespace Miner
                             {
                                 using (Stream stream = openFile.OpenFile())
                                 {
+                                    XmlSerializer xml = new XmlSerializer(typeof(GameState));
+                                    this.Game.GameState = (GameState)xml.Deserialize(stream);
+                                    this.Game.GameState.Miner.Suit = new Nanosuit();
                                     stream.Close();
                                 }
+
+                                this.Game.GameState.Miner.game = this.Game;
+
+                                GameScene newScene = new GameScene(this.Game)
+                                {
+                                    OldKeyState = this.CurrentKeyState
+                                };
+                                MenuManager.GetInstance().CurrentMenu = newScene;
                             }
                             catch (Exception exc)
                             {

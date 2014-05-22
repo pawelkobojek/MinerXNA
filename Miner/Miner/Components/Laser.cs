@@ -33,6 +33,8 @@ namespace Miner
         /// </summary>
         private int currentCooldown = 0;
 
+        private Laser() { }
+
         public Laser(MinerGame game)
         {
             this.field = new Field();
@@ -82,6 +84,15 @@ namespace Miner
             {
                 currentCooldown -= gameTime.ElapsedGameTime.Milliseconds;
             }
+        }
+
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public override string GetAssetName()
+        {
+            return ASSET_NAME;
         }
     }
 }

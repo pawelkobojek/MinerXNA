@@ -171,5 +171,19 @@ namespace Miner
         //            (tw < tx || tw > rx) &&
         //            (th < ty || th > ry));
         //}
+
+        /// <summary>
+        /// Ładuje potrzebny obrazek.
+        /// </summary>
+        public void LoadContent()
+        {
+            this.sprite = this.game.Content.Load<Texture2D>(this.GetAssetName());
+        }
+
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public abstract string GetAssetName();
     }
 }

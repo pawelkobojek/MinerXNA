@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<HighScores xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HighScoreList>
+    <Result>
+      <PlayerName>asd</PlayerName>
+      <Score>60</Score>
+    </Result>
+    <Result>
+      <PlayerName>asd</PlayerName>
+      <Score>10</Score>
+    </Result>
+  </HighScoreList>
+</HighScores>

@@ -79,12 +79,14 @@ namespace Miner
         /// <summary>
         /// Liczba punktów doświadczenia potrzebna do osiągnięcia następnego poziomu.
         /// </summary>
-        public int ExpToNextLevel { get; private set; }
+        public int ExpToNextLevel { get; set; }
 
         /// <summary>
         /// Przebyta droga. Pole używane do obliczenia wydatkowania paliwa. Zerowane gdy osiągnie szerokość pola.
         /// </summary>
         private float distanceTraveled = 0.0f;
+
+        //public int nanoSuitLevel = 0;
 
         /// <summary>
         /// Prywatny konstruktor bezparametrowy, konieczny do procesu serializacji XML.
@@ -494,6 +496,15 @@ namespace Miner
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public override string GetAssetName()
+        {
+            return ASSET_NAME;
         }
     }
 }

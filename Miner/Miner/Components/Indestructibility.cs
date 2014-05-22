@@ -18,6 +18,8 @@ namespace Miner
         /// </summary>
         public const string ASSET_NAME = "Bonuses/indestructibility";
 
+        private Indestructibility() {}
+
         public Indestructibility(MinerGame game, int posX, int posY)
             : base(game, posX, posY)
         {
@@ -26,6 +28,15 @@ namespace Miner
             this.RemainingUsageTime = this.TotalUsageTime;
             this.LifeTime = 20000;
             this.RemainingLifeTime = this.LifeTime;
+        }
+
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public override string GetAssetName()
+        {
+            return ASSET_NAME;
         }
     }
 }

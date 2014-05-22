@@ -5,12 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Miner
 {
     /// <summary>
     /// Klasa bazowa dla wszystkich klas reprezentujących bonusy.
     /// </summary>
+    [XmlInclude(typeof(DoubleJump))]
+    [XmlInclude(typeof(Indestructibility))]
+    [XmlInclude(typeof(KeyLocalizer))]
+    [XmlInclude(typeof(Laser))]
+    [XmlInclude(typeof(MoreEnemies))]
+    [XmlInclude(typeof(Fuel))]
     public abstract class BonusItem : GameObject
     {
         /// <summary>

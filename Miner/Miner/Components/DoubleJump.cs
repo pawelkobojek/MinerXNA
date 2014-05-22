@@ -23,6 +23,8 @@ namespace Miner
         /// </summary>
         public bool Used { get; set; }
 
+        private DoubleJump() { }
+
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -40,6 +42,13 @@ namespace Miner
             this.RemainingLifeTime = this.LifeTime;
         }
 
-
+        /// <summary>
+        /// Zwraca ścieżkę do obrazka. Zawsze zwraca ASSET_NAME.
+        /// </summary>
+        /// <returns>Ścieżkę do obrazka.</returns>
+        public override string GetAssetName()
+        {
+            return ASSET_NAME;
+        }
     }
 }
