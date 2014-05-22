@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Miner.Scenes;
 using System;
 using System.Collections.Generic;
@@ -96,6 +97,8 @@ namespace Miner
                         {
                             try
                             {
+                                this.Game.Content.Unload();
+
                                 using (Stream stream = openFile.OpenFile())
                                 {
                                     XmlSerializer xml = new XmlSerializer(typeof(GameState));
@@ -105,6 +108,57 @@ namespace Miner
                                 }
 
                                 this.Game.GameState.Miner.game = this.Game;
+
+                                foreach (var item in this.Game.GameState.Enemies)
+                                {
+                                    item.game = this.Game;
+                                }
+
+                                foreach (var item in this.Game.GameState.Bullets)
+                                {
+                                    item.game = this.Game;
+                                }
+
+                                this.Game.Content.Load<SpriteFont>("general");
+                                this.Game.Content.Load<Texture2D>(Kosmojopek.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Ufolowca.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(WladcaLaserowejDzidy.ASSET_NAME);
+                                //this.Content.Load<Texture2D>(PoteznySultan.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Miner.ASSET_NAME);
+                                //this.Content.Load<Texture2D>(CosmicMatter.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(DoubleJump.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Field.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Fuel.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Indestructibility.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Key.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(KeyLocalizer.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Laser.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(MoreEnemies.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(SolidRock.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(SpaceGate.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(TitanRock.ASSET_NAME);
+                                this.Game.Content.Load<Texture2D>(Bullet.ASSET_NAME);
+
+                                this.Game.GameState.Miner.LoadContent();
+
+                                foreach (var item in this.Game.GameState.Enemies)
+                                {
+                                    item.LoadContent();
+                                }
+
+                                foreach (var item in this.Game.GameState.Bullets)
+                                {
+                                    item.LoadContent();
+                                }
+
+                                foreach (var item in this.Game.GameState.Map.Fields)
+                                {
+                                    foreach (var field in item)
+                                    {
+                                        field.game = this.Game;
+                                        field.LoadContent();
+                                    }
+                                }
 
                                 GameScene newScene = new GameScene(this.Game)
                                 {

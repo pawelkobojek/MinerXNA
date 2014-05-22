@@ -46,9 +46,9 @@ namespace Miner
         {
             this.bonusSpawnTime += gameTime.ElapsedGameTime.Milliseconds;
 
-            KeyboardState keyState = Keyboard.GetState();
+            CurrentKeyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(Keys.Escape))
+            if (CurrentKeyState.IsKeyDown(Keys.Escape) && !OldKeyState.IsKeyDown(Keys.Escape))
             {
                 PauseMenu newMenu = new PauseMenu(this.Game, this)
                 {
@@ -118,6 +118,8 @@ namespace Miner
                     item.Update(gameTime);
                 }
             }
+
+            OldKeyState = CurrentKeyState;
         }
 
         /// <summary>

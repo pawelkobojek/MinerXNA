@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <GameState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <Name>S</Name>
+    <Score>2</Score>
+  </User>
   <CurrentLevel>1</CurrentLevel>
   <Difficulty>Easy</Difficulty>
   <Miner>
@@ -11,12 +15,18 @@
     <Width>50</Width>
     <Height>46</Height>
     <Position>
-      <X>36.6667442</X>
-      <Y>316.667877</Y>
+      <X>143.333725</X>
+      <Y>350.6958</Y>
     </Position>
     <LastMoveDirection>right</LastMoveDirection>
+    <Suit>
+      <Fuel>98</Fuel>
+      <Durability>100</Durability>
+    </Suit>
+    <Experience>0</Experience>
+    <ExpToNextLevel>100</ExpToNextLevel>
     <RangedDamage>0</RangedDamage>
-    <JumpImpulse>-230</JumpImpulse>
+    <JumpImpulse>-250</JumpImpulse>
   </Miner>
   <Keys />
   <Map>
@@ -6270,8 +6280,21 @@
       <Width>30</Width>
       <Height>7</Height>
       <Position>
-        <X>243.3337</X>
-        <Y>84.94466</Y>
+        <X>512.5016</X>
+        <Y>28.0694447</Y>
+      </Position>
+    </Bullet>
+    <Bullet>
+      <sprite>
+        <Name />
+      </sprite>
+      <PosX>0</PosX>
+      <PosY>0</PosY>
+      <Width>30</Width>
+      <Height>7</Height>
+      <Position>
+        <X>329.16748</X>
+        <Y>186.194992</Y>
       </Position>
     </Bullet>
   </Bullets>
@@ -6285,12 +6308,12 @@
       <Width>50</Width>
       <Height>46</Height>
       <Position>
-        <X>735.6686</X>
+        <X>740.3358</X>
         <Y>514.9171</Y>
       </Position>
       <JumpOnHitPoints>2</JumpOnHitPoints>
       <LaserHitPoints>1</LaserHitPoints>
-      <ExprienceGained>10</ExprienceGained>
+      <ExprienceGained>20</ExprienceGained>
       <LastMoveDirection>right</LastMoveDirection>
       <MeleeDamage>0</MeleeDamage>
     </Enemy>
@@ -6303,12 +6326,12 @@
       <Width>50</Width>
       <Height>46</Height>
       <Position>
-        <X>514</X>
-        <Y>422.069763</Y>
+        <X>542</X>
+        <Y>409.042084</Y>
       </Position>
       <JumpOnHitPoints>2</JumpOnHitPoints>
       <LaserHitPoints>1</LaserHitPoints>
-      <ExprienceGained>10</ExprienceGained>
+      <ExprienceGained>30</ExprienceGained>
       <LastMoveDirection>right</LastMoveDirection>
       <MeleeDamage>0</MeleeDamage>
       <JumpImpulse>-230</JumpImpulse>
@@ -6322,12 +6345,12 @@
       <Width>50</Width>
       <Height>46</Height>
       <Position>
-        <X>451.3343</X>
+        <X>460.6679</X>
         <Y>514.9171</Y>
       </Position>
       <JumpOnHitPoints>3</JumpOnHitPoints>
       <LaserHitPoints>2</LaserHitPoints>
-      <ExprienceGained>10</ExprienceGained>
+      <ExprienceGained>40</ExprienceGained>
       <LastMoveDirection>right</LastMoveDirection>
       <MeleeDamage>0</MeleeDamage>
       <JumpImpulse>0</JumpImpulse>
